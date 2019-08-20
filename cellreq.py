@@ -9,11 +9,11 @@ class enmRestSession(Session):
 
     def __init__(self, enm, login, password):
         super().__init__()
-        self.enm = enm
+        self.enm = enm if enm[-1] == "/" else f"{enm}/"
         self.headers.update({"Content-Type": "application/json"})
         self.verify = False
         requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-        login_str = f'{enm}login?IDToken1={login}&IDToken2={password}'
+        login_str = f"{enm}login?IDToken1={login}&IDToken2={password}"
         rest_response = self.post(login_str)
         if rest_response.status_code != requests.codes.ok:
             raise HTTPError()
@@ -34,7 +34,7 @@ def main():
                         "https://iegtbl8030-7.gtoss.eng.ericsson.se/",
                         "login",
                         "pass"
-                        ) as s:
+                       ) as s:
         print(s.send_configuration_task(param).json()["requestResult"])
 
 
