@@ -33,7 +33,8 @@ def main():
     with enmRestSession(
                         "https://iegtbl8030-7.gtoss.eng.ericsson.se/",
                         "login",
-                        "pass"
+                        "pass",
+                        param
                        ) as s:
         print(s.send_configuration_task(param).json()["requestResult"])
 
