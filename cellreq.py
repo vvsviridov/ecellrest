@@ -6,6 +6,13 @@ from requests.exceptions import HTTPError
 
 
 class enmRestSession(Session):
+    """
+    Inherit requests.Session object for connecting
+    and authenticating on ENM for REST NBI service
+    (ALEX: Configuration Tasks - CM Cell
+    Management REST Northbound Interface).
+    Raises HTTPError if it can't login in.
+    """
 
     def __init__(self, enm, login, password):
         super().__init__()
