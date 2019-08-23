@@ -31,8 +31,10 @@ class enmRestSession(Session):
         return resp
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        self.get(f"{self.enm}logout")
-        super().__exit__(self, exc_type, exc_val, exc_tb)
+        try:
+            self.get(f"{self.enm}logout")
+        finally:
+            super().__exit__(self, exc_type, exc_val, exc_tb)
 
 
 def main():
